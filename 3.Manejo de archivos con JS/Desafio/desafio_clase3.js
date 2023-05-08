@@ -3,8 +3,9 @@ const fs = require("fs");
 class ProductManager {
   #products;
   static lastID = 0;
-  constructor() {
+  constructor(path) {
     this.#products = [];
+    this.path = path
   }
 
   addProduct(title, description, price, thumbnail, code, stock) {
@@ -39,7 +40,7 @@ class ProductManager {
   async saveProductsToFile() {
     try {
       const productsString = JSON.stringify(this.#products, null, 2);
-      await fs.promises.writeFile("products.json", productsString);
+      await fs.promises.writeFile(this.path, productsString);
     } catch (error) {
       console.log("Error al guardar los productos en el archivo:", error);
     }
@@ -47,7 +48,7 @@ class ProductManager {
 
   async loadProductsFromFile() {
     try {
-      const fileData = await fs.promises.readFile("products.json", "utf-8");
+      const fileData = await fs.promises.readFile(this.path, "utf-8");
       this.#products = JSON.parse(fileData);
     } catch (error) {
       console.log("Error al cargar los productos desde el archivo:", error);
@@ -91,7 +92,7 @@ class ProductManager {
   }
 }
 
-const productManager = new ProductManager();
+const productManager = new ProductManager("products.json");
 
 productManager.addProduct(
   "Zapatillas",
