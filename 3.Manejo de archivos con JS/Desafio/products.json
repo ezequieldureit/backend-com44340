@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Zapatillas",
+    "description": "Zapatillas deportivas",
+    "price": 30,
+    "thumbnail": "https://img_ejemplo.com/zapatillas.jpg",
+    "code": "4531",
+    "stock": 10
+  },
+  {
+    "id": 2,
+    "title": "Zapatos",
+    "description": "Zapatos elegante sport",
+    "price": 30,
+    "thumbnail": "https://img_ejemplo.com/zapatos.jpg",
+    "code": "5622",
+    "stock": 5
+  }
+]
