@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1100,
+    "title": "Reloj Rolex",
+    "description": "Marca de relojes de lujo conocida por su calidad,precision y estatus iconico.",
+    "price": 10000,
+    "thumbnail": "https://img_ejemplo.com/rolex.jpg",
+    "code": "4531",
+    "stock": 10
+  },
+  {
+    "id": 1200,
+    "title": "Reloj Omega",
+    "description": "Marca suiza conocida por su elegancia y precision.",
+    "price": 7000,
+    "thumbnail": "https://img_ejemplo.com/omega.jpg",
+    "code": "5622",
+    "stock": 5
+  },
+  {
+    "id": 1300,
+    "title": "Reloj TAG Heuer",
+    "description": "Marca de relojes de lujo que combina precision suiza con un enfoque en el deporte y el rendimiento.",
+    "price": 6500,
+    "thumbnail": "https://img_ejemplo.com/tag_heuer.jpg",
+    "code": "5623",
+    "stock": 50
+  },
+  {
+    "id": 1400,
+    "title": "Reloj Patek Philippe",
+    "description": "Es una de las marcas mas exclusivas y prestigiosas de la relojeria. Se destaca por su artesania exquisita.",
+    "price": 8800,
+    "thumbnail": "https://img_ejemplo.com/patek_philippe.jpg",
+    "code": "5624",
+    "stock": 51
+  },
+  {
+    "id": 1500,
+    "title": "Reloj Audemars Piguet",
+    "description": "Es una de las marcas de alta gama conocida por su audacia y creatividad.",
+    "price": 8350,
+    "thumbnail": "https://img_ejemplo.com/audemars_piguet.jpg",
+    "code": "5625",
+    "stock": 58
+  },
+  {
+    "id": 1600,
+    "title": "Reloj Cartier",
+    "description": "Sus relojes combinan la artesanía tradicional con un estilo sofisticado y atemporal.",
+    "price": 5780,
+    "thumbnail": "https://img_ejemplo.com/cartier.jpg",
+    "code": "5626",
+    "stock": 45
+  },
+  {
+    "id": 1700,
+    "title": "Reloj Breitling",
+    "description": "Breitling es una marca suiza conocida por sus relojes de alta gama para aviadores. ",
+    "price": 7100,
+    "thumbnail": "https://img_ejemplo.com/breitling.jpg",
+    "code": "5627",
+    "stock": 57
+  },
+  {
+    "id": 1800,
+    "title": "Reloj Hublot",
+    "description": "Sus relojes presentan diseños audaces y materiales modernos, como la fusión de titanio y caucho.",
+    "price": 8450,
+    "thumbnail": "https://img_ejemplo.com/hublot.jpg",
+    "code": "5628",
+    "stock": 35
+  },
+  {
+    "id": 1900,
+    "title": "Reloj IWC Schaffhausen",
+    "description": "Sus relojes se distinguen por su precisión, funcionalidad y diseño sofisticado. ",
+    "price": 4370,
+    "thumbnail": "https://img_ejemplo.com/iws_schaffhausen.jpg",
+    "code": "5629",
+    "stock": 25
+  },
+  {
+    "id": 2000,
+    "title": "Reloj Jaeger-LeCoultre",
+    "description": "Sus relojes combinan tradición y modernidad, y son apreciados por su elegancia y atención al detalle.",
+    "price": 9900,
+    "thumbnail": "https://img_ejemplo.com/jaeger_lecoultre.jpg",
+    "code": "5722",
+    "stock": 15
+  }
+]
