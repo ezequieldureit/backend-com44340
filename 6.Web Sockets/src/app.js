@@ -36,6 +36,13 @@ app.use("/", viewRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/cart", cartRouter);
 
+app.use('*', (req, res)=>
+   res.status(404).json({
+             error: "Ruta no existente"
+  }) 
+);
+
+
 // Server start
 const server = app.listen(port, () => {
   console.log(`Servidor escuchando en el puerto ${port}`);
