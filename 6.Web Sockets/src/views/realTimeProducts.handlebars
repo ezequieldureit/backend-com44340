@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="left-column">
+    <h2><b>Add or delete books</b></h2>
+    <form class="form" id="addBookForm">
+      <label for="title">Title</label>
+      <br />
+      <input type="text" name="title" id="title" />
+      <br />
+
+      <label for="description">Description</label>
+      <br />
+      <input type="text" name="description" id="description" />
+      <br />
+
+      <label for="code">Code</label>
+      <br />
+      <input type="number" name="code" id="code" />
+      <br />
+
+      <label for="price">Price</label>
+      <br />
+      <input type="number" name="price" id="price" />
+      <br />
+
+      <label for="stock">Stock</label>
+      <br />
+      <input type="number" name="stock" id="stock" />
+      <br />
+
+      <label for="category">Category</label>
+      <br />
+      <input type="text" name="category" id="category" />
+      <br />
+
+      <label for="thumbnail">Thumbnail</label>
+      <br />
+      <input type="text" name="thumbnail" id="thumbnail" />
+      <br />
+
+      <button type="submit" id="submitProduct">Add book</button>
+    </form>
+
+    <form class="form" id="deleteBookForm">
+      <label for="titleDelete">Enter the name of the book</label>
+      <br />
+      <input type="text" name="title" id="titleDelete" />
+      <br />
+
+      <button type="submit" id="deleteProduct">Delete book</button>
+    </form>
+  </div>
+
+  <div class="right-column">
+    <h2><b>Books</b></h2>
+
+    <div id="container">
+      <table class="product-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Code</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Category</th>
+            <th>Thumbnail</th>
+          </tr>
+        </thead>
+        <tbody id="productTableBody">
+          <!-- Here the table rows will be generated dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="http://localhost:8080/socket.io/socket.io.js"></script>
+<script src="/public.js"></script>
+
