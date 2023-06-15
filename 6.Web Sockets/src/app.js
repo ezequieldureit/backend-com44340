@@ -45,7 +45,7 @@ app.use('*', (req, res)=>
 
 // Server start
 const server = app.listen(port, () => {
-  console.log(`Servidor escuchando en el puerto ${port}`);
+  console.log(`Server listening in port ${port}`);
 });
 
 // Setting of Socket.io
@@ -85,7 +85,7 @@ io.on("connection", async (socket) => {
       stock === "" ||
       category === ""
     ) {
-      console.log("Error(codigo ya utilizado o faltan campos)");
+      console.log("Error(code already used or missing fields)");
     } else {
       try {
         const product = {
