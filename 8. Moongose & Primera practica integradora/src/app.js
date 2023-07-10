@@ -1,15 +1,18 @@
 import express from "express";
 import handlebars from "express-handlebars";
 import path from "path";
-import ProductManager from "./manager/productManager.js";
 import productsRouter from "./routes/products.routes.js";
 import cartRouter from "./routes/cart.routes.js";
 import viewRouter from "./routes/view.routes.js";
 import { configureSocket } from "./socket.js";
+import connectDB from "./db.js";
+import { usersRouter } from "./routes/users.routes.js";
 
 const app = express();
 const port = 8080;
-const productManager = new ProductManager();
+
+// Conexión a la base de datos
+connectDB();
 
 // Setting of Express Server
 app.use(express.json());
@@ -34,6 +37,7 @@ app.set("views", path.resolve(process.cwd(), "src/views"));
 app.use("/", viewRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/users", usersRouter);
 
 // Route si la ruta no existe
 app.use("*", (req, res) =>
