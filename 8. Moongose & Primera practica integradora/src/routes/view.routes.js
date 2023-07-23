@@ -1,42 +1,25 @@
-// import { Router } from "express";
-// import ProductManager from "../manager/productManager.js";
+import express from 'express';
+import { Router } from 'express';
+import {
+    viewChat,
+  viewProducts,
+  viewRealTimeProducts,
+  viewUsers,
+} from '../controllers/view.controller.js';
 
-// const viewRouter = Router();
-// const productManager = new ProductManager();
-
-// viewRouter.get("/", async (req, res) => {
-//   let allProducts = await productManager.getProducts();
-//   res.render("home", {
-//     title: "Proyecto Final Coder House",
-//     products: allProducts,
-//   });
-// });
-
-// viewRouter.get("/realtimeproducts", (req, res) => {
-//   res.render("realTimeProducts",{});
-// });
-
-// export default viewRouter;
-import { Router } from "express";
-import ProductManager from "../manager/productManager.js";
 
 const viewRouter = Router();
-const productManager = new ProductManager();
 
-viewRouter.get("/", async (req, res) => {
-  let allProducts = await productManager.getProducts();
-  res.render("home", {
-    title: "Proyecto Final Coder House",
-    products: allProducts,
-  });
-});
+viewRouter.use(express.json());
+viewRouter.use(express.urlencoded({ extended: true }));
 
-viewRouter.get("/realtimeproducts", async (req, res) => {
-  let allProducts = await productManager.getProducts();
-  res.render("realTimeProducts", {
-    title: "Productos en tiempo real",
-    products: allProducts,
-  });
-});
+
+viewRouter.get('/', viewProducts);
+
+viewRouter.get('/realtimeproducts', viewRealTimeProducts);
+
+viewRouter.get('/users', viewUsers);
+
+viewRouter.get("/chat", viewChat);
 
 export default viewRouter;

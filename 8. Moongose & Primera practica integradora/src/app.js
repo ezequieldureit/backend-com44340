@@ -1,48 +1,51 @@
-import express from "express";
-import handlebars from "express-handlebars";
-import path from "path";
-import productsRouter from "./routes/products.routes.js";
-import cartRouter from "./routes/cart.routes.js";
-import viewRouter from "./routes/view.routes.js";
-import { configureSocket } from "./socket.js";
-import connectDB from "./db.js";
-import { usersRouter } from "./routes/users.routes.js";
+import express from 'express';
+import handlebars from 'express-handlebars';
+import path from 'path';
+import { configureSocket } from './utils/socket.js';
+import connectDB from './utils/db.js';
+import { usersRouter } from './routes/users.routes.js';
+import productsRouter from './routes/products.routes.js';
+import viewRouter from './routes/view.routes.js';
+import cartRouter from './routes/cart.routes.js';
 
 const app = express();
 const port = 8080;
 
-// Conexión a la base de datos
+// Conection with MongoDB
 connectDB();
 
-// Setting of Express Server
+// Express Server Configuration
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Static files
-app.use("/", express.static(path.resolve(process.cwd(), "src/public")));
+// Static Files
+app.use('/', express.static(path.resolve(process.cwd(), 'src/public')));
 
-// Setting of Handlebars
+// Handlebars Configuration
 app.engine(
-  "handlebars",
+  'handlebars',
   handlebars.engine({
-    extname: ".handlebars",
-    defaultLayout: "main",
-    layoutsDir: path.resolve(process.cwd(), "src/views/layouts"),
+    extname: '.handlebars',
+    defaultLayout: 'main',
+    layoutsDir: path.resolve(process.cwd(), 'src/views/layouts'),
   })
 );
-app.set("view engine", "handlebars");
-app.set("views", path.resolve(process.cwd(), "src/views"));
+app.set('view engine', 'handlebars');
+app.set('views', path.resolve(process.cwd(), 'src/views'));
 
-// Routes
-app.use("/", viewRouter);
-app.use("/api/products", productsRouter);
-app.use("/api/cart", cartRouter);
-app.use("/api/users", usersRouter);
 
-// Route si la ruta no existe
-app.use("*", (req, res) =>
+// Routes API
+app.use('/api/users', usersRouter);
+app.use('/api/products', productsRouter);
+app.use('/api/carts', cartRouter);
+
+// Routes Views
+app.use('/', viewRouter);
+
+// Default route if the route doesn't exist
+app.use('*', (req, res) =>
   res.status(404).json({
-    error: "Ruta no existente",
+    error: 'Ruta no existente',
   })
 );
 
@@ -51,5 +54,5 @@ const server = app.listen(port, () => {
   console.log(`Server listening in port ${port}`);
 });
 
-// Configurar Socket.io
+// Socket IO Configuration
 configureSocket(server);

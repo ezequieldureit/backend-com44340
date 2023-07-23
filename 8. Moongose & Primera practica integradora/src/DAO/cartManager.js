@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 
 class CartManager {
   constructor(filePath) {
-    this.filePath = filePath || "./src/models/carrito.json";
+    this.filePath = filePath || "./src/DAO/models/carrito.json";
     this.createCartFileIfNotExists();
   }
 

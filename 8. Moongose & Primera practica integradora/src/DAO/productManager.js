@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 
 class ProductManager {
   constructor(filePath) {
-    this.filePath = filePath || "./src/models/products.json";
+    this.filePath = filePath || "./src/DAO/models/products.json";
     this.createProductsFileIfNotExists();
   }
 

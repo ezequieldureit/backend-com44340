@@ -1,19 +1,15 @@
-<h1 class="titulo-principal"><u>Book List</u></h1>
+<h1 class='titulo-principal'><u>Book List</u></h1>
 
-<ul class="book-list">
+<ul class='book-list'>
   {{#each products}}
-    <li class="book-list-item">
-      <img
-        src="{{this.thumbnail}}"
-        alt="Imagen del libro"
-        class="book-thumbnail"
-      />
-      <div class="book-details">
-        <h2 class="book-title"><u>{{this.title}}</u></h2>
-        <p class="book-description">{{this.description}}</p>
-        <p class="book-category">Category: {{this.category}}</p>
-        <p class="book-stock">Stock: {{this.stock}}</p>
-        <p class="book-price">Price: {{this.price}}</p>
+    <li class='book-list-item'>
+      
+      <div class='book-details'>
+        <h2 class='book-title'>Title:{{this.title}}</h2>
+        <p class='book-description'>Description:{{this.description}}</p>
+        <p class='book-category'>Category: {{this.category}}</p>
+        <p class='book-stock'>Stock: {{this.stock}}</p>
+        <p class='book-price'>Price: {{this.price}}</p>
       </div>
     </li>
   {{/each}}

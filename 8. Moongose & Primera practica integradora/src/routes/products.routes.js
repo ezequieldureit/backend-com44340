@@ -1,111 +1,22 @@
-import express from "express";
-import ProductManager from "../manager/productManager.js";
+import { Router } from 'express';
+import {
+  createProduct,
+  getAllProducts,
+  getOneProduct,
+  removeProduct,
+  updateProduct,
+} from '../controllers/products.controller.js';
 
-const productsRouter = express.Router();
-const productManager = new ProductManager();
+const productRouter = Router();
 
-productsRouter.use(express.json());
-productsRouter.use(express.urlencoded({ extended: true }));
+productRouter.get('/', getAllProducts);
 
-productsRouter.get("/", async (req, res) => {
-  try {
-    const result = await productManager.getProducts();
-    res.status(200).json({
-      status: "Success",
-      data: result,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: "Error",
-      motive: error.message,
-      data: {},
-    });
-  }
-});
+productRouter.get('/:id', getOneProduct);
 
-productsRouter.get("/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const productById = await productManager.getProductById(id);
-    if (!productById) {
-      res.status(404).json({
-        status: "Error",
-        motive: "Product not found",
-        data: {},
-      });
-    } else {
-      res.status(200).json({
-        status: "Success",
-        data: productById,
-      });
-    }
-  } catch (error) {
-    res.status(500).json({
-      status: "Error",
-      motive: error.message,
-      data: {},
-    });
-  }
-});
+productRouter.post('/', createProduct);
 
-productsRouter.post("/", async (req, res) => {
-  try {
-    const newProduct = req.body;
-    const result = await productManager.addProducts(newProduct);
-    res.status(201).json({
-      status: "Success",
-      data: result,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: "Error",
-      motive: error.message,
-      data: {},
-    });
-  }
-});
+productRouter.put('/:id', updateProduct);
 
-productsRouter.put("/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const updatedProduct = req.body;
-    const result = await productManager.updateProducts(id, updatedProduct);
-    if (!result) {
-      res.status(404).json({
-        status: "Error",
-        motive: "Product not found",
-        data: {},
-      });
-    } else {
-      res.status(200).json({
-        status: "Success",
-        data: result,
-      });
-    }
-  } catch (error) {
-    res.status(500).json({
-      status: "Error",
-      motive: error.message,
-      data: {},
-    });
-  }
-});
+productRouter.delete('/:id', removeProduct);
 
-productsRouter.delete("/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const result = await productManager.deleteProducts(id);
-    res.status(200).json({
-      status: "Success",
-      data: result,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: "Error",
-      motive: error.message,
-      data: {},
-    });
-  }
-});
-
-export default productsRouter;
+export default productRouter;
