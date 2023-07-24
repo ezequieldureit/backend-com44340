@@ -59,12 +59,32 @@ const viewUsers = async (req, res) => {
   }
 };
 
+// const viewChat = async (req, res) => {
+//   try {
+//     const allMessages = await messagesService.getAllMessages();
+//     res.render('chat', {
+//       messages: allMessages,
+//     });
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ error: 'Error al obtener los mensajes en tiempo real' });
+//   }
+// };
 const viewChat = async (req, res) => {
   try {
     const allMessages = await messagesService.getAllMessages();
+
+    // Mapeamos el arreglo allMessages para crear un nuevo arreglo con las propiedades adecuadas
+    const mappedMessages = allMessages.map((message) => {
+      return {
+        user: message.user, // Asegúrate de que las propiedades user y message existan en el objeto message
+        message: message.message,
+      };
+    });
+
     res.render('chat', {
-      title: 'Mensajes en tiempo real',
-      messages: allMessages,
+      messages: mappedMessages, // Pasamos el nuevo arreglo mapeado a la plantilla
     });
   } catch (error) {
     res
@@ -73,4 +93,4 @@ const viewChat = async (req, res) => {
   }
 };
 
-export { viewProducts, viewRealTimeProducts, viewUsers , viewChat};
+export { viewProducts, viewRealTimeProducts, viewUsers, viewChat };

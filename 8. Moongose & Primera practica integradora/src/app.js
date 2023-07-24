@@ -1,7 +1,7 @@
 import express from 'express';
 import handlebars from 'express-handlebars';
 import path from 'path';
-import { configureSocket } from './utils/socket.js';
+import { configureSocket } from './utils/socketServer.js';
 import connectDB from './utils/db.js';
 import { usersRouter } from './routes/users.routes.js';
 import productsRouter from './routes/products.routes.js';
@@ -32,7 +32,6 @@ app.engine(
 );
 app.set('view engine', 'handlebars');
 app.set('views', path.resolve(process.cwd(), 'src/views'));
-
 
 // Routes API
 app.use('/api/users', usersRouter);

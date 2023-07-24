@@ -1,13 +1,9 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
 export const MessageModel = model(
-  'messages',
+  "messages",
   new Schema({
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
-    message: { type: String, required: true },
+    message: { type: String, required: true, max: 100 },
+    user: { type: String, required: true, max: 100 },
   })
 );

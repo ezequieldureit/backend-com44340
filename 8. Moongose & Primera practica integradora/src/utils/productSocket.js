@@ -1,13 +1,13 @@
-import { Server } from 'socket.io';
 import { productService } from '../services/products.service.js';
-import { MessageModel } from '../DAO/models/messages.model.js';
 
-// Function to handle product socket events
-async function handleProductSocket(socket) {
+export async function handleProductSocket(socket, io) {
   try {
+    // Emitir todos los productos al cliente cuando se conecte
     const products = await productService.find();
     socket.emit('mensajeServer', products);
   } catch (error) {
+    // Enviar un evento de error al cliente si ocurre un error al obtener los productos
+    socket.emit('productError', 'Error al obtener los productos');
     console.log(error);
   }
 
@@ -34,7 +34,9 @@ async function handleProductSocket(socket) {
       stock === '' ||
       category === ''
     ) {
-      console.log('Error(code already used or missing fields)');
+      console.log('Error (code already used or missing fields)');
+      // Enviar un evento de error al cliente si falta algún campo
+      socket.emit('productError', 'Por favor completa todos los campos');
     } else {
       try {
         const product = {
@@ -51,6 +53,8 @@ async function handleProductSocket(socket) {
         await productService.create(product);
         io.emit('productoAgregado', product);
       } catch (error) {
+        // Enviar un evento de error al cliente si ocurre un error al agregar el producto
+        socket.emit('productError', 'Error al agregar el producto');
         console.log(error);
       }
     }
@@ -69,50 +73,25 @@ async function handleProductSocket(socket) {
         io.emit('productDeleted', products);
         console.log('Producto eliminado');
       } else {
+        // Enviar un evento de error al cliente si el producto no se encuentra
+        socket.emit('productError', 'Producto no encontrado');
         console.log('The product was not found. No deletion was performed');
-        socket.emit('productNotFound', 'The product was not found.');
       }
     } catch (error) {
+      // Enviar un evento de error al cliente si ocurre un error al eliminar el producto
+      socket.emit('productError', 'Error al eliminar el producto');
       console.log(error);
     }
   });
-}
 
-// Function to handle chat socket events
-// Function to handle chat socket events
-async function handleChatSocket(socket) {
-  console.log('New client connected');
-
-  try {
-    const messages = await MessageModel.find({});
-    socket.emit('initialMessages', messages);
-  } catch (error) {
-    console.log('Error fetching messages:', error);
-  }
-
-  socket.on('chatMessage', async (data) => {
-    console.log('Received message:', data);
-    const newMessage = new MessageModel({
-      email: data.email,
-      message: data.message,
-    });
+  socket.on('getProducts', async () => {
     try {
-      await newMessage.save();
-      io.emit('chatMessage', data);
+      const products = await productService.find();
+      socket.emit('mensajeServer', products);
     } catch (error) {
-      console.log('Error saving message:', error);
+      // Enviar un evento de error al cliente si ocurre un error al obtener los productos
+      socket.emit('productError', 'Error al obtener los productos');
+      console.log(error);
     }
-  });
-}
-
-export function configureSocket(server) {
-  const io = new Server(server);
-
-  io.on('connection', (socket) => {
-    // Handle product-related socket events
-    handleProductSocket(socket);
-
-    // Handle chat-related socket events
-    handleChatSocket(socket);
   });
 }

@@ -8,11 +8,11 @@ class MessagesService {
     }
   }
   async getAllMessages() {
-    const users = await MessageModel.find({});
+    const users = await MessageModel.find();
     return users;
   }
   async createMessage(user, message) {
-    this.validateMessage(firstName, lastName, email);
+    this.validatePostMessage(user, message);
     const messageCreated = await MessageModel.create({ user, message });
     return messageCreated;
   }
