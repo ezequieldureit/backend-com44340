@@ -59,18 +59,7 @@ const viewUsers = async (req, res) => {
   }
 };
 
-// const viewChat = async (req, res) => {
-//   try {
-//     const allMessages = await messagesService.getAllMessages();
-//     res.render('chat', {
-//       messages: allMessages,
-//     });
-//   } catch (error) {
-//     res
-//       .status(500)
-//       .json({ error: 'Error al obtener los mensajes en tiempo real' });
-//   }
-// };
+
 const viewChat = async (req, res) => {
   try {
     const allMessages = await messagesService.getAllMessages();
