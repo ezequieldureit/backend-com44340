@@ -2,11 +2,11 @@ import { productService } from '../services/products.service.js';
 
 export async function handleProductSocket(socket, io) {
   try {
-    // Emitir todos los productos al cliente cuando se conecte
+    // Issue all products to the client when connected
     const products = await productService.find();
     socket.emit('mensajeServer', products);
   } catch (error) {
-    // Enviar un evento de error al cliente si ocurre un error al obtener los productos
+    // Send an error event to the client if an error occurs while getting the products
     socket.emit('productError', 'Error al obtener los productos');
     console.log(error);
   }
@@ -35,7 +35,7 @@ export async function handleProductSocket(socket, io) {
       category === ''
     ) {
       console.log('Error (code already used or missing fields)');
-      // Enviar un evento de error al cliente si falta algún campo
+      // Send an error event to the client if any fields are missing
       socket.emit('productError', 'Por favor completa todos los campos');
     } else {
       try {
@@ -53,7 +53,7 @@ export async function handleProductSocket(socket, io) {
         await productService.create(product);
         io.emit('productoAgregado', product);
       } catch (error) {
-        // Enviar un evento de error al cliente si ocurre un error al agregar el producto
+        // Send an error event to the client if an error occurs while adding the product
         socket.emit('productError', 'Error al agregar el producto');
         console.log(error);
       }
@@ -73,12 +73,12 @@ export async function handleProductSocket(socket, io) {
         io.emit('productDeleted', products);
         console.log('Producto eliminado');
       } else {
-        // Enviar un evento de error al cliente si el producto no se encuentra
+        // Send an error event to the client if the product is not found
         socket.emit('productError', 'Producto no encontrado');
         console.log('The product was not found. No deletion was performed');
       }
     } catch (error) {
-      // Enviar un evento de error al cliente si ocurre un error al eliminar el producto
+      // Send an error event to the client if an error occurs while removing the product
       socket.emit('productError', 'Error al eliminar el producto');
       console.log(error);
     }
@@ -89,7 +89,7 @@ export async function handleProductSocket(socket, io) {
       const products = await productService.find();
       socket.emit('mensajeServer', products);
     } catch (error) {
-      // Enviar un evento de error al cliente si ocurre un error al obtener los productos
+      // Send an error event to the client if an error occurs while getting the products
       socket.emit('productError', 'Error al obtener los productos');
       console.log(error);
     }
